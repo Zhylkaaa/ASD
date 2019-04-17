@@ -47,6 +47,16 @@ typedef long double ld;
 10
 */
 
+// Test 3
+/*
+5
+6
+10
+8
+7
+11
+*/
+
 struct Node {
 	int w;
 	char color;
@@ -115,7 +125,13 @@ void height_count(Node* tree){
 }
 
 bool color_tree(Node* tree, int black_quota, char parent_color){
-	if(tree==NULL)return true;
+	if(tree==NULL){
+		if(parent_color == 'r'){
+			return black_quota == -1;
+		} else {
+			return black_quota == 0;
+		}
+	}
 	if(tree->color != 'h'){
 		return color_tree(tree->left, black_quota, tree->color) 
 			&& color_tree(tree->right, black_quota, tree->color);
