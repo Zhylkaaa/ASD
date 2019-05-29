@@ -84,6 +84,7 @@ void dijkstra_set(int n, vector< vector< pair<int, int> > > &G, vector<int> &par
 
 		for(pair<int, int> i : G[v]){ // iterating over adjacent vertices
 			if(path_weight[i.f] > path_weight[v] + i.s){
+				s.erase({path_weight[i.f], i.f});
 				parent[i.f] = v;
 				path_weight[i.f] = path_weight[v] + i.s;
 				s.insert({path_weight[i.f], i.f}); 
