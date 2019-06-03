@@ -34,13 +34,18 @@ int bfs(vector< vector<int> > &G, vector< vector<int> > &parent, int s, int t, i
 	return d[t];
 }
 
-void build_graph(vector< vector<int> > &P, vector< vector<int> > &G, int t){
-	
+void __build_graph(vector< vector<int> > &P, vector< vector<int> > &G, vector<bool> &in_graph, int t){
+	in_graph[t] = true;
 	for(int v:P[t]){
 		G[t].push_back(v);
 		G[v].push_back(t);
-		build_graph(P, G, v);
+		if(!in_graph[v])
+			__build_graph(P, G, in_graph, v);
 	}
+}
+void build_graph(vector< vector<int> > &P, vector< vector<int> > &G, int t, int n){
+	vector<bool> in_graph(n, false); 
+	__build_graph(P, G, in_graph, t);
 }
 
 void dfs(int v, vector<bool> &Vis, vector<int> &dis, vector<int> &low, vector<int> &parent, vector< pair<int, int> > &bridges, int &time, vector< vector<int> > &G){
@@ -100,7 +105,7 @@ int main(){
 	}
 
 	vector< vector<int> > GP(n); // G prim
-	build_graph(parent, GP, t);
+	build_graph(parent, GP, t, n);
 
 	vector< pair<int, int> > bridges;
 
