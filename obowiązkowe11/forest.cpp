@@ -13,7 +13,7 @@ F(n) - maximum sum that we can make using first n elements of sequence
 
 Base cases:
 
-if we have 1 tree it's alwase optimal to take it
+if we have 1 tree it's always optimal to take it
 if we have 2 trees we can take them bouse
 
 Prove:
